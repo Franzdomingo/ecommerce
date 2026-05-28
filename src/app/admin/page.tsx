@@ -19,22 +19,22 @@ export default async function AdminPage({
     <div className="mx-auto max-w-6xl px-4 py-12">
       <div className="mb-10 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Admin</h1>
-          <p className="mt-1 text-sm text-zinc-500">
+          <h1 className="text-3xl font-bold tracking-tight text-black dark:text-white">Admin</h1>
+      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-500">
             {products.length} products &middot; {totalItems} units &middot; $
             {totalValue.toLocaleString("en-US", { minimumFractionDigits: 2 })} total value
           </p>
         </div>
         <Link
           href="/admin/new"
-          className="rounded-lg bg-zinc-100 px-5 py-2.5 text-sm font-medium text-zinc-900 transition-colors hover:bg-zinc-300"
+          className="rounded-lg bg-black dark:bg-white px-5 py-2.5 text-sm font-medium text-white dark:text-black transition-opacity hover:opacity-80"
         >
           Add Product
         </Link>
       </div>
 
       {editingProduct && (
-        <div className="mb-10 rounded-lg border border-zinc-800 bg-zinc-900/50 p-6">
+        <div className="mb-10 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 p-6">
           <div className="mb-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold">Editing: {editingProduct.name}</h2>
             <Link href="/admin" className="text-sm text-zinc-500 hover:text-zinc-300">
@@ -58,10 +58,10 @@ export default async function AdminPage({
         </div>
       )}
 
-      <div className="overflow-hidden rounded-lg border border-zinc-800">
+      <div className="overflow-hidden rounded-lg border border-zinc-200 dark:border-zinc-800">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-zinc-800 bg-zinc-900/50">
+            <tr className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
               <th className="px-4 py-3 text-left font-medium text-zinc-400">Product</th>
               <th className="px-4 py-3 text-left font-medium text-zinc-400">Price</th>
               <th className="px-4 py-3 text-left font-medium text-zinc-400">Inventory</th>
@@ -71,11 +71,11 @@ export default async function AdminPage({
           </thead>
           <tbody>
             {products.map((product) => (
-              <tr key={product.id} className="border-b border-zinc-800 last:border-0">
+              <tr key={product.id} className="border-b border-zinc-200 dark:border-zinc-800 last:border-0">
                 <td className="px-4 py-3">
                   <Link
                     href={`/products/${product.slug}`}
-                    className="font-medium hover:text-zinc-300"
+                    className="font-medium text-black dark:text-white hover:text-zinc-600 dark:hover:text-zinc-300"
                   >
                     {product.name}
                   </Link>

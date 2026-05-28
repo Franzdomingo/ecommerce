@@ -1,21 +1,16 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter_Tight } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const interTight = Inter_Tight({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-inter-tight",
 });
 
 export const metadata: Metadata = {
-  title: "Store — Minimal Goods",
-  description: "Curated essentials. Quality over quantity.",
+  title: "FPGD — Agent Services",
+  description: "Deploy Hermes Agents and OpenClaw on your infrastructure. Managed, secure, production-ready.",
 };
 
 export default function RootLayout({
@@ -26,13 +21,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${interTight.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-zinc-950 text-zinc-100 font-sans">
+      <body className="min-h-full flex flex-col font-[family-name:var(--font-inter-tight)] tracking-tight bg-white dark:bg-zinc-950 text-black dark:text-white">
         <Header />
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-zinc-800 py-8 text-center text-sm text-zinc-500">
-          <p>&copy; {new Date().getFullYear()} Minimal Goods. Quality over quantity.</p>
+        <footer className="border-t border-zinc-200 dark:border-zinc-800 py-8 text-center text-sm text-zinc-500 dark:text-zinc-500">
+          <div className="mx-auto max-w-6xl px-4">
+            <p>&copy; {new Date().getFullYear()} FPGD — Deploy agents, deliver value.</p>
+          </div>
         </footer>
       </body>
     </html>

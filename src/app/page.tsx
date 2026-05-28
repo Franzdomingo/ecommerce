@@ -1,52 +1,46 @@
-import { getFeaturedProducts, getProducts, getCategories } from "@/lib/products";
-import ProductGrid from "@/components/ProductGrid";
-import Link from "next/link";
+import { getProducts } from "@/lib/products";
+import ProductCard from "@/components/ProductCard";
 
 export default function Home() {
-  const featured = getFeaturedProducts();
-  const allProducts = getProducts();
-  const categories = getCategories();
+  const products = getProducts();
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-12">
+    <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24">
       {/* Hero */}
-      <section className="mb-16 border-b border-zinc-800 pb-12">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          Curated Essentials
+      <section className="mb-20">
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl text-black dark:text-white">
+          Deploy agents.<br />Deliver value.
         </h1>
-        <p className="mt-3 max-w-lg text-lg text-zinc-400">
-          Thoughtfully selected goods built to last. No trends, no fluff -- just well-made things you will reach for every day.
+        <p className="mt-4 max-w-lg text-base text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          Production-ready agent deployments for your infrastructure.
+          Hermes Agent and OpenClaw, configured and running.
+          No fluff, just shipped.
         </p>
-      </section>
-
-      {/* Featured */}
-      <section className="mb-16">
-        <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-2xl font-semibold">Featured</h2>
-        </div>
-        <ProductGrid products={featured} />
-      </section>
-
-      {/* Categories */}
-      <section className="mb-16">
-        <h2 className="mb-6 text-2xl font-semibold">Categories</h2>
-        <div className="flex flex-wrap gap-3">
-          {categories.map((cat) => (
-            <Link
-              key={cat}
-              href={`/?category=${cat.toLowerCase()}`}
-              className="rounded-full border border-zinc-700 px-4 py-2 text-sm text-zinc-300 transition-colors hover:border-zinc-500 hover:bg-zinc-800"
+        <div className="mt-8 flex flex-wrap gap-3">
+          {products.map((p) => (
+            <a
+              key={p.id}
+              href={`#${p.slug}`}
+              className="rounded-full border border-zinc-300 dark:border-zinc-700 px-4 py-2 text-sm text-zinc-700 dark:text-zinc-300 transition-colors hover:border-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-800"
             >
-              {cat}
-            </Link>
+              {p.name}
+            </a>
           ))}
         </div>
       </section>
 
-      {/* All Products */}
+      {/* Services */}
       <section>
-        <h2 className="mb-6 text-2xl font-semibold">All Products</h2>
-        <ProductGrid products={allProducts} />
+        <div className="mb-8 flex items-center justify-between">
+          <h2 className="text-2xl font-semibold tracking-tight text-black dark:text-white">
+            Services
+          </h2>
+        </div>
+        <div className="grid gap-8 sm:grid-cols-2">
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
       </section>
     </div>
   );
