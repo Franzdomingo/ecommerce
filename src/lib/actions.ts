@@ -20,14 +20,12 @@ export async function createProductAction(formData: FormData) {
   addProduct(extractFormData(formData));
   revalidatePath('/');
   revalidatePath('/admin');
-  return { success: true };
 }
 
 export async function editProductAction(id: string, formData: FormData) {
   updateProduct(id, extractFormData(formData));
   revalidatePath('/');
   revalidatePath('/admin');
-  return { success: true };
 }
 
 export async function removeProductAction(formData: FormData) {
@@ -35,5 +33,4 @@ export async function removeProductAction(formData: FormData) {
   deleteProduct(id);
   revalidatePath('/');
   revalidatePath('/admin');
-  return { success: true };
 }
