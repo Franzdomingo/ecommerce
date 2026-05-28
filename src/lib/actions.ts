@@ -20,9 +20,11 @@ export async function createProductAction(formData: FormData) {
   addProduct(extractFormData(formData));
   revalidatePath('/');
   revalidatePath('/admin');
+  revalidatePath('/admin/new');
 }
 
-export async function editProductAction(id: string, formData: FormData) {
+export async function editProductAction(formData: FormData) {
+  const id = formData.get('id') as string;
   updateProduct(id, extractFormData(formData));
   revalidatePath('/');
   revalidatePath('/admin');

@@ -1,7 +1,3 @@
-'use client';
-
-import Link from 'next/link';
-
 interface ProductFormProps {
   initialData?: {
     name?: string;
@@ -16,7 +12,7 @@ interface ProductFormProps {
 
 export default function ProductForm({ initialData }: ProductFormProps) {
   return (
-    <form className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-1.5">
         <label htmlFor="name" className="text-sm font-medium text-zinc-300">
           Product Name
@@ -126,25 +122,6 @@ export default function ProductForm({ initialData }: ProductFormProps) {
       >
         Save Product
       </button>
-    </form>
-  );
-}
-
-export function DeleteProductForm({ productId, productName }: { productId: string; productName: string }) {
-  return (
-    <form action="/admin" method="post" className="inline">
-      <input type="hidden" name="id" value={productId} />
-      <button
-        type="submit"
-        className="text-sm text-red-500 hover:text-red-400"
-        onClick={(e) => {
-          if (!confirm(`Delete "${productName}"?`)) {
-            e.preventDefault();
-          }
-        }}
-      >
-        Delete
-      </button>
-    </form>
+    </div>
   );
 }

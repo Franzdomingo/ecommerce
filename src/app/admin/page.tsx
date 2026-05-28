@@ -1,5 +1,5 @@
 import { getProducts } from "@/lib/products";
-import { createProductAction } from "@/lib/actions";
+import { createProductAction, editProductAction, removeProductAction } from "@/lib/actions";
 import ProductForm from "@/components/admin/ProductForm";
 import Link from "next/link";
 
@@ -13,6 +13,7 @@ export default async function AdminPage({
 
   const totalValue = products.reduce((sum, p) => sum + p.price * p.inventory, 0);
   const totalItems = products.reduce((sum, p) => sum + p.inventory, 0);
+  const editingProduct = edit ? products.find((p) => p.id === edit) : null;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-12">
@@ -32,18 +33,27 @@ export default async function AdminPage({
         </Link>
       </div>
 
-      {edit && products.find((p) => p.id === edit) && (
+      {editingProduct && (
         <div className="mb-10 rounded-lg border border-zinc-800 bg-zinc-900/50 p-6">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-semibold">
-              Editing: {products.find((p) => p.id === edit)!.name}
-            </h2>
+            <h2 className="text-lg font-semibold">Editing: {editingProduct.name}</h2>
             <Link href="/admin" className="text-sm text-zinc-500 hover:text-zinc-300">
               Cancel
             </Link>
           </div>
-          <form action={createProductAction}>
-            <EditFormFields productId={edit} />
+          <form action={editProductAction}>
+            <input type="hidden" name="id" value={editingProduct.id} />
+            <ProductForm
+              initialData={{
+                name: editingProduct.name,
+                description: editingProduct.description,
+                price: editingProduct.price,
+                inventory: editingProduct.inventory,
+                category: editingProduct.category,
+                image: editingProduct.image,
+                featured: editingProduct.featured,
+              }}
+            />
           </form>
         </div>
       )}
@@ -86,13 +96,12 @@ export default async function AdminPage({
                     >
                       Edit
                     </Link>
-                    <form action="/admin" method="post">
+                    <form action={removeProductAction}>
                       <input type="hidden" name="id" value={product.id} />
                       <button
                         type="submit"
                         className="text-sm text-red-500 hover:text-red-400"
-                        formAction={`/admin`}
-                        onSubmit={(e) => {
+                        onClick={(e) => {
                           if (!confirm(`Delete "${product.name}"?`)) {
                             e.preventDefault();
                           }
@@ -110,8 +119,4 @@ export default async function AdminPage({
       </div>
     </div>
   );
-}
-
-function EditFormFields({ productId }: { productId: string }) {
-  return <input type="hidden" name="id" value={productId} />;
 }
