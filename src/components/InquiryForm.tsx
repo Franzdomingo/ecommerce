@@ -27,8 +27,14 @@ export default function InquiryForm({ productName, productPrice }: InquiryFormPr
           name: data.get('name'),
           email: data.get('email'),
           message: data.get('message'),
+          _hp: data.get('_hp'), // honeypot
         }),
       });
+
+      if (res.status === 429) {
+        setError('You can only submit once every 10 minutes. Please wait.');
+        return;
+      }
 
       if (!res.ok) throw new Error('Failed to submit');
       setSubmitted(true);
@@ -50,6 +56,11 @@ export default function InquiryForm({ productName, productPrice }: InquiryFormPr
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      {/* Honeypot -- invisible to humans */}
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <input name="_hp" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
         Request deployment
       </p>
