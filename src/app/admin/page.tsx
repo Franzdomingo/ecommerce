@@ -12,7 +12,7 @@ export default function AdminPage({
 
   // Wrap as async to read searchParams
   return (
-    <AdminContent productsPromise={products} searchParamsPromise={searchParams} />
+    <AdminContent products={products} searchParamsPromise={searchParams} />
   );
 }
 
