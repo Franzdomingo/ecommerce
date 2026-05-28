@@ -1,4 +1,4 @@
-import { createProduct } from "@/lib/actions";
+import { createProductAction } from "@/lib/actions";
 import ProductForm from "@/components/admin/ProductForm";
 import Link from "next/link";
 
@@ -15,7 +15,9 @@ export default function NewProductPage() {
       <h1 className="mb-8 text-2xl font-bold tracking-tight">New Product</h1>
 
       <div className="rounded-lg border border-zinc-800 bg-zinc-900/50 p-6">
-        <ProductForm action={createProduct} />
+        <form action={createProductAction}>
+          <ProductForm />
+        </form>
       </div>
     </div>
   );

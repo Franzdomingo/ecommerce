@@ -1,30 +1,15 @@
-import { getProducts, getProductById } from "@/lib/products";
-import { removeProduct, editProduct } from "@/lib/actions";
-import Link from "next/link";
+import { getProducts } from "@/lib/products";
+import { createProductAction } from "@/lib/actions";
 import ProductForm from "@/components/admin/ProductForm";
+import Link from "next/link";
 
-export default function AdminPage({
+export default async function AdminPage({
   searchParams,
 }: {
   searchParams: Promise<{ edit?: string }>;
 }) {
   const products = getProducts();
-
-  // Wrap as async to read searchParams
-  return (
-    <AdminContent products={products} searchParamsPromise={searchParams} />
-  );
-}
-
-async function AdminContent({
-  products,
-  searchParamsPromise,
-}: {
-  products: Awaited<ReturnType<typeof getProducts>>;
-  searchParamsPromise: Promise<{ edit?: string }>;
-}) {
-  const { edit } = await searchParamsPromise;
-  const editingProduct = edit ? getProductById(edit) : null;
+  const { edit } = await searchParams;
 
   const totalValue = products.reduce((sum, p) => sum + p.price * p.inventory, 0);
   const totalItems = products.reduce((sum, p) => sum + p.inventory, 0);
@@ -47,40 +32,19 @@ async function AdminContent({
         </Link>
       </div>
 
-      {editingProduct && (
+      {edit && products.find((p) => p.id === edit) && (
         <div className="mb-10 rounded-lg border border-zinc-800 bg-zinc-900/50 p-6">
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-semibold">Editing: {editingProduct.name}</h2>
-            <Link
-              href="/admin"
-              className="text-sm text-zinc-500 hover:text-zinc-300"
-            >
+            <h2 className="text-lg font-semibold">
+              Editing: {products.find((p) => p.id === edit)!.name}
+            </h2>
+            <Link href="/admin" className="text-sm text-zinc-500 hover:text-zinc-300">
               Cancel
             </Link>
           </div>
-          <ProductForm
-            action={async (prev: unknown, formData: FormData) => {
-              "use server";
-              return editProduct(editingProduct.id, {
-                name: formData.get("name") as string,
-                description: formData.get("description") as string,
-                price: Number(formData.get("price")),
-                inventory: Number(formData.get("inventory")),
-                category: formData.get("category") as string,
-                image: formData.get("image") as string,
-                featured: formData.get("featured") === "on",
-              });
-            }}
-            initialData={{
-              name: editingProduct.name,
-              description: editingProduct.description,
-              price: editingProduct.price,
-              inventory: editingProduct.inventory,
-              category: editingProduct.category,
-              image: editingProduct.image,
-              featured: editingProduct.featured,
-            }}
-          />
+          <form action={createProductAction}>
+            <EditFormFields productId={edit} />
+          </form>
         </div>
       )}
 
@@ -122,16 +86,13 @@ async function AdminContent({
                     >
                       Edit
                     </Link>
-                    <form
-                      action={async () => {
-                        "use server";
-                        await removeProduct(product.id);
-                      }}
-                    >
+                    <form action="/admin" method="post">
+                      <input type="hidden" name="id" value={product.id} />
                       <button
                         type="submit"
                         className="text-sm text-red-500 hover:text-red-400"
-                        onClick={(e) => {
+                        formAction={`/admin`}
+                        onSubmit={(e) => {
                           if (!confirm(`Delete "${product.name}"?`)) {
                             e.preventDefault();
                           }
@@ -149,4 +110,8 @@ async function AdminContent({
       </div>
     </div>
   );
+}
+
+function EditFormFields({ productId }: { productId: string }) {
+  return <input type="hidden" name="id" value={productId} />;
 }

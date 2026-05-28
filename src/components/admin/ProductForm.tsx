@@ -1,38 +1,22 @@
 'use client';
 
-import { useActionState } from 'react';
-import { createProduct } from '@/lib/actions';
-import { ProductFormData } from '@/lib/types';
 import Link from 'next/link';
 
-const initialState = { success: false };
+interface ProductFormProps {
+  initialData?: {
+    name?: string;
+    description?: string;
+    price?: number;
+    inventory?: number;
+    category?: string;
+    image?: string;
+    featured?: boolean;
+  };
+}
 
-export default function ProductForm({
-  initialData,
-  action,
-}: {
-  initialData?: Partial<ProductFormData>;
-  action: typeof createProduct;
-}) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [state, formAction, _pending] = useActionState(action, initialState);
-
-  if (state.success) {
-    return (
-      <div className="flex flex-col items-center gap-4 py-16 text-center">
-        <p className="text-lg text-green-400">Product saved successfully!</p>
-        <Link
-          href="/admin"
-          className="text-sm text-zinc-400 underline underline-offset-2 hover:text-zinc-200"
-        >
-          Back to admin panel
-        </Link>
-      </div>
-    );
-  }
-
+export default function ProductForm({ initialData }: ProductFormProps) {
   return (
-    <form action={formAction} className="flex flex-col gap-6">
+    <form className="flex flex-col gap-6">
       <div className="flex flex-col gap-1.5">
         <label htmlFor="name" className="text-sm font-medium text-zinc-300">
           Product Name
@@ -141,6 +125,25 @@ export default function ProductForm({
         className="mt-2 rounded-lg bg-zinc-100 px-6 py-3 font-medium text-zinc-900 transition-colors hover:bg-zinc-300"
       >
         Save Product
+      </button>
+    </form>
+  );
+}
+
+export function DeleteProductForm({ productId, productName }: { productId: string; productName: string }) {
+  return (
+    <form action="/admin" method="post" className="inline">
+      <input type="hidden" name="id" value={productId} />
+      <button
+        type="submit"
+        className="text-sm text-red-500 hover:text-red-400"
+        onClick={(e) => {
+          if (!confirm(`Delete "${productName}"?`)) {
+            e.preventDefault();
+          }
+        }}
+      >
+        Delete
       </button>
     </form>
   );
