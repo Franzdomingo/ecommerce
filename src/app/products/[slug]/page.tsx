@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getProductBySlug } from "@/lib/products";
+import InquiryForm from "@/components/InquiryForm";
 
 export default async function ProductPage({
   params,
@@ -73,12 +74,7 @@ export default async function ProductPage({
             </span>
           </div>
 
-          <button
-            disabled={product.inventory === 0}
-            className="mt-4 w-full rounded-lg bg-black dark:bg-white px-6 py-3 font-medium text-white dark:text-black transition-opacity hover:opacity-80 disabled:cursor-not-allowed disabled:opacity-40"
-          >
-            {product.inventory > 0 ? "Order Deployment" : "Sold Out"}
-          </button>
+          <InquiryForm productName={product.name} productPrice={product.price} />
         </div>
       </div>
     </div>
