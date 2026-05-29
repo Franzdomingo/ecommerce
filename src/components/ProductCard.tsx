@@ -30,10 +30,10 @@ export default function ProductCard({ product }: { product: Product }) {
         </p>
         <div className="mt-3 flex items-center justify-between">
           <span className="text-xl font-bold text-black dark:text-white">
-            ${product.price.toFixed(2)}
+            ${product.price.toFixed(2)}<span className="text-sm font-normal text-zinc-500 dark:text-zinc-500">/mo</span>
           </span>
           <span className="text-xs text-zinc-500 dark:text-zinc-500">
-            {product.inventory > 0 ? "Available" : "Sold out"}
+            Cancel anytime
           </span>
         </div>
       </div>

@@ -48,7 +48,7 @@ export default async function ProductPage({
           </div>
 
           <p className="text-2xl font-bold text-black dark:text-white">
-            ${product.price.toFixed(2)}
+            ${product.price.toFixed(2)}<span className="text-base font-normal text-zinc-500 dark:text-zinc-500">/mo</span>
           </p>
 
           <p className="leading-relaxed text-zinc-600 dark:text-zinc-400">
