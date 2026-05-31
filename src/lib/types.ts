@@ -10,6 +10,8 @@ export interface Product {
   inventory: number;
   featured: boolean;
   createdAt: string;
+  features: string[];
+  gradient: string;
 }
 
 export interface ProductFormData {
