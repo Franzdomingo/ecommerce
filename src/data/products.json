@@ -6,11 +6,20 @@
     "description": "Your personal AI assistant hosted and managed. Handles emails, research, scheduling, social media, and more. Always online, always updated. Includes all API token costs.",
     "price": 49.00,
     "currency": "USD",
-    "image": "https://res.cloudinary.com/dj5y0x2o8/video/upload/so_0/hermes-vid-slide_bg7oat.jpg",
-    "category": "Services",
+    "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
+    "category": "AI Agent Services",
     "inventory": 999,
     "featured": true,
-    "createdAt": "2026-05-28T00:00:00Z"
+    "createdAt": "2026-05-28T00:00:00Z",
+    "features": [
+      "24/7 AI assistant availability",
+      "Email & calendar management",
+      "Research & summarization",
+      "Social media scheduling",
+      "All API tokens included",
+      "Managed hosting"
+    ],
+    "gradient": "from-indigo-500/20 via-purple-500/20 to-pink-500/20"
   },
   {
     "id": "2",
@@ -19,11 +28,20 @@
     "description": "Automated multi-agent research team. Give it a topic, get back a full report with sources, organized by specialists. Hosted, managed, and always improving. Includes all API token costs.",
     "price": 29.00,
     "currency": "USD",
-    "image": "https://res.cloudinary.com/dj5y0x2o8/video/upload/so_0/oz-bot-slide_qzyqch.jpg",
-    "category": "Services",
+    "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80",
+    "category": "AI Agent Services",
     "inventory": 999,
     "featured": true,
-    "createdAt": "2026-05-28T00:00:00Z"
+    "createdAt": "2026-05-28T00:00:00Z",
+    "features": [
+      "Multi-agent research orchestration",
+      "Source-verified reports",
+      "Specialist agent routing",
+      "Continuous improvement",
+      "All API tokens included",
+      "Managed hosting"
+    ],
+    "gradient": "from-emerald-500/20 via-teal-500/20 to-cyan-500/20"
   },
   {
     "id": "3",
@@ -32,10 +50,19 @@
     "description": "Get both agents at a discount. Your AI assistant plus a research team in one package. Hosted, managed, all API tokens included. Best value.",
     "price": 59.00,
     "currency": "USD",
-    "image": "https://res.cloudinary.com/dj5y0x2o8/video/upload/so_0/hermes-vid-slide_bg7oat.jpg",
-    "category": "Services",
+    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80",
+    "category": "AI Agent Services",
     "inventory": 999,
     "featured": true,
-    "createdAt": "2026-05-28T00:00:00Z"
+    "createdAt": "2026-05-28T00:00:00Z",
+    "features": [
+      "Everything in Hermes Agent",
+      "Everything in OpenClaw",
+      "Priority support",
+      "Discounted combined price",
+      "All API tokens included",
+      "Managed hosting"
+    ],
+    "gradient": "from-amber-500/20 via-orange-500/20 to-rose-500/20"
   }
 ]
