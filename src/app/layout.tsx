@@ -7,6 +7,8 @@ import { CartProvider } from "@/lib/cart-context";
 import Link from "next/link";
 import Image from "next/image";
 import CustomCursor from "@/components/CustomCursor";
+import Chatbot from "@/components/Chatbot";
+import Script from "next/script";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -30,20 +32,88 @@ const ballet = Ballet({
   variable: "--font-ballet",
 });
 
+// AIO, AEO, and GEO Optimized Metadata
 export const metadata: Metadata = {
-  title: "Franz Domingo | Store",
-  description: "Premium AI agents and full-stack development solutions.",
+  metadataBase: new URL("https://store.franzdomingo.dev"),
+  title: {
+    default: "Franz Domingo | Premium AI Agents & Software Solutions",
+    template: "%s | Franz Domingo Official Store",
+  },
+  description: "Expertly engineered AI agents, Hermes & OpenClaw research systems, and full-stack development. High-performance technical solutions for enterprise and startups. Specialized in AI orchestration, Next.js engineering, and computer vision.",
+  keywords: [
+    "AI Agent Deployment",
+    "Multi-Agent Research Systems",
+    "OpenClaw OS",
+    "Hermes AI",
+    "Full-Stack Engineering",
+    "Next.js Developer Manila",
+    "AI Solutions Philippines",
+    "Custom AI Architecture",
+    "Computer Vision Services",
+    "Software Engineering Sampaloc Manila",
+    "Technical Consulting San Mateo Isabela",
+  ],
+  authors: [{ name: "Franz Domingo", url: "https://franzdomingo.dev" }],
+  creator: "Franz Domingo",
+  publisher: "Franz Domingo",
+  formatDetection: {
+    email: false,
+    address: true,
+    telephone: false,
+  },
   icons: {
-    icon: "/oz-logo.png",
+    icon: [
+      { url: '/oz-logo.png', type: 'image/png', sizes: '48x48' },
+      { url: '/oz-logo.png', type: 'image/png', sizes: '96x96' },
+      { url: '/oz-logo.png', type: 'image/png', sizes: '192x192' },
+      { url: '/oz-logo.png', type: 'image/png', sizes: '512x512' },
+    ],
+    shortcut: '/oz-logo.png',
+    apple: [
+      { url: '/oz-logo.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
   openGraph: {
-    title: "Franz Domingo | Store",
-    description: "Premium AI agents and full-stack development solutions.",
+    title: "Franz Domingo | Premium AI Agents & Software Solutions",
+    description: "High-performance AI agents and custom software engineering. Available globally, localized for Metro Manila and Isabela.",
     url: "https://store.franzdomingo.dev",
-    siteName: "FPGD Store",
+    siteName: "Franz Domingo Official Store",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/oz-logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Franz Domingo Official Store",
+      },
+    ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Franz Domingo | Premium AI Agents & Software Solutions",
+    description: "Expert AI orchestration and custom full-stack engineering.",
+    images: ["/oz-logo.png"],
+    creator: "@franzdomingo",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: "verification_token", // Placeholder
+  },
+  alternates: {
+    canonical: "https://store.franzdomingo.dev",
+  },
+  category: "technology",
 };
 
 export default function RootLayout({
@@ -53,10 +123,63 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${geist.variable} ${ibmPlexMono.variable} ${spaceMono.variable} ${ballet.variable} h-full antialiased`}>
+      <head>
+        {/* GEO-Targeting Meta Tags */}
+        <meta name="geo.region" content="PH-00;PH-ISA" />
+        <meta name="geo.placename" content="Sampaloc Manila, San Mateo Isabela" />
+        <meta name="geo.position" content="14.6135;120.9928" />
+        <meta name="ICBM" content="14.6135, 120.9928" />
+      </head>
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground transition-colors duration-300">
+        {/* Structured Data for SEO/AEO */}
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              "name": "Franz Domingo Official Store",
+              "image": "https://store.franzdomingo.dev/oz-logo.png",
+              "description": "Expertly engineered AI agents and full-stack software solutions.",
+              "url": "https://store.franzdomingo.dev",
+              "address": [
+                {
+                  "@type": "PostalAddress",
+                  "addressLocality": "Sampaloc",
+                  "addressRegion": "Metro Manila",
+                  "addressCountry": "PH"
+                },
+                {
+                  "@type": "PostalAddress",
+                  "addressLocality": "San Mateo",
+                  "addressRegion": "Isabela",
+                  "addressCountry": "PH"
+                }
+              ],
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 14.6135,
+                "longitude": 120.9928
+              },
+              "priceRange": "$$",
+              "serviceType": [
+                "AI Agent Deployment",
+                "Full-Stack Web Development",
+                "Custom AI Architecture",
+                "Mobile App Development"
+              ],
+              "founder": {
+                "@type": "Person",
+                "name": "Franz Domingo"
+              }
+            })
+          }}
+        />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <CartProvider>
             <CustomCursor />
+            <Chatbot />
             <Header />
             <main className="flex-1">{children}</main>
             <footer className="border-t border-border bg-card/50 backdrop-blur-sm">

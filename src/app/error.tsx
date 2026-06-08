@@ -1,29 +1,72 @@
 'use client';
 
+import { useEffect } from "react";
 import Link from "next/link";
+import { AlertTriangle, RefreshCcw, Home, Terminal } from "lucide-react";
+import GlitchText from "@/components/GlitchText";
 
-export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string };
+  reset: () => void;
+}) {
+  useEffect(() => {
+    console.error("CRITICAL_SYSTEM_FAULT:", error);
+  }, [error]);
+
   return (
-    <div className="relative min-h-[70vh] flex items-center justify-center">
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-rose-300/10 to-transparent rounded-full blur-3xl" />
+    <div className="min-h-[80vh] bg-background flex items-center justify-center p-6 transition-colors duration-300">
+      {/* Background Gradients */}
+      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-red-500/5 rounded-full blur-[120px]" />
       </div>
-      <div className="text-center px-4 animate-fade-up opacity-0 [animation-fill-mode:forwards]">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-rose-500">Something went wrong</p>
-        <h1 className="mt-4 text-7xl font-bold tracking-tight text-zinc-300 dark:text-zinc-700">Oops</h1>
-        <p className="mt-4 text-lg text-zinc-500 dark:text-zinc-500">An unexpected error occurred</p>
-        <p className="mt-2 text-sm text-zinc-400 dark:text-zinc-600 max-w-md mx-auto">{error.message || "Please try again or come back later."}</p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <button onClick={reset}
-            className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-premium-600 to-premium-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-premium-500/20 transition-all duration-300 hover:from-premium-500 hover:to-premium-600 active:scale-[0.98]">
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
-            Try Again
+
+      <div className="max-w-md w-full text-center space-y-8">
+        <div className="relative inline-block">
+          <div className="h-24 w-24 border border-red-500/30 bg-red-500/5 flex items-center justify-center mx-auto mb-8 relative group">
+            <AlertTriangle className="h-10 w-10 text-red-500 group-hover:scale-110 transition-transform" />
+            <div className="absolute top-0 left-0 w-full h-[1px] bg-red-500/50 animate-[transmissionScan_2s_linear_infinite]" />
+          </div>
+          <div className="absolute -top-4 -right-4 font-mono text-[10px] text-red-500 font-bold uppercase tracking-widest bg-background border border-red-500/30 px-2 py-1 shadow-lg">
+            SYS_FAULT_500
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <h1 className="font-mono text-4xl font-bold tracking-tighter uppercase sm:text-5xl text-foreground">
+            <GlitchText text="System Error" />
+          </h1>
+          <div className="font-mono text-[10px] text-red-500/70 uppercase tracking-widest bg-red-500/5 p-2 border border-red-500/20 break-all overflow-hidden max-h-20 overflow-y-auto">
+            {error.digest ? `DIGEST_ID: ${error.digest}` : "GENERIC_RUNTIME_EXCEPTION"}
+          </div>
+          <p className="font-mono text-sm text-muted-foreground uppercase tracking-widest leading-relaxed">
+            A critical system fault has occurred during technical rendering. 
+            Automated diagnostic recovery is required.
+          </p>
+        </div>
+
+        <div className="pt-8 grid grid-cols-2 gap-4 border-t border-border/50">
+          <button 
+            onClick={reset}
+            className="group relative flex items-center justify-center gap-3 border border-coral bg-coral py-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-white transition-all hover:bg-transparent hover:text-coral shadow-lg shadow-coral/10"
+          >
+            <RefreshCcw className="h-4 w-4 transition-transform group-hover:rotate-180 duration-700" />
+            RETRY
           </button>
-          <Link href="/"
-            className="inline-flex items-center gap-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 px-6 py-3 text-sm font-semibold text-zinc-700 dark:text-zinc-300 transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 active:scale-[0.98]">
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
-            Back to services
+          <Link 
+            href="/"
+            className="group relative flex items-center justify-center gap-3 border border-border bg-card py-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-foreground transition-all hover:border-coral hover:text-coral"
+          >
+            <Home className="h-4 w-4 transition-transform group-hover:-translate-y-1" />
+            REBOOT
           </Link>
+        </div>
+
+        <div className="flex justify-between font-mono text-[8px] text-muted-foreground uppercase tracking-widest">
+          <span>LATENCY: CRITICAL</span>
+          <span>RECOVERY: READY</span>
         </div>
       </div>
     </div>
