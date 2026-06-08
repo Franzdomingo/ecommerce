@@ -6,6 +6,7 @@ import { ThemeProvider } from "next-themes";
 import { CartProvider } from "@/lib/cart-context";
 import Link from "next/link";
 import Image from "next/image";
+import CustomCursor from "@/components/CustomCursor";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -55,6 +56,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground transition-colors duration-300">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <CartProvider>
+            <CustomCursor />
             <Header />
             <main className="flex-1">{children}</main>
             <footer className="border-t border-border bg-card/50 backdrop-blur-sm">
@@ -73,7 +75,7 @@ export default function RootLayout({
                         <div className="font-mono text-xl font-bold tracking-tighter text-coral leading-none">
                           FRANZ<span className="text-foreground">.DOMINGO</span>
                         </div>
-                        <span className="font-mono text-[8px] uppercase tracking-[0.3em] text-muted-foreground leading-none mt-1">
+                        <span className="font-mono text-[8px] uppercase tracking-[0.2em] text-muted-foreground leading-none mt-1">
                           Official Store
                         </span>
                       </div>

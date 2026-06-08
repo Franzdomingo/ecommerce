@@ -108,10 +108,15 @@
   }
   body {
     @apply bg-background text-foreground antialiased selection:bg-coral selection:text-white dark:selection:text-dark transition-colors duration-300;
+    cursor: none;
   }
   html {
     @apply font-sans h-full;
   }
+}
+
+a, button, [role="button"], .cursor-pointer {
+  cursor: none !important;
 }
 
 /* Professional Readability Overrides */

@@ -12,11 +12,21 @@ export default function Home() {
   const products = getProducts();
 
   const categories = [
-    { name: "Hermes", count: 1, description: "Your personal AI workforce managed and deployed." },
-    { name: "OpenClaw", count: 1, description: "Multi-agent research and deep intelligence team." },
-    { name: "Both", count: 1, description: "Combined power of Hermes and OpenClaw agents." },
-    { name: "Web Development", count: 1, description: "High-performance digital experiences and apps." },
-    { name: "Custom", count: 1, description: "Tailored AI solutions for enterprise needs." },
+    { name: "AI & Intelligence", count: 4, description: "Advanced AI agents, research systems, and prompt engineering." },
+    { name: "Software Engineering", count: 2, description: "High-performance web and cross-platform mobile development." },
+    { name: "Strategic Solutions", count: 2, description: "Bespoke AI architectures and specialized technical consulting." },
+  ];
+
+  const testimonials = [
+    { name: "David Miller", role: "Business Owner", text: "Franz is a rare talent who understands both the technical depth and the aesthetic requirements of high-end software." },
+    { name: "Elena Rossi", role: "Product Manager", text: "The Computer Vision suite provided real-time feedback that was critical for our prototype's success. Highly recommend for specialized AI tasks." },
+    { name: "Linh Nguyen", role: "Entrepreneur", text: "Clean code, strategic thinking, and innovative solutions. The Prompt Engineering engine has drastically improved our output consistency." },
+    { name: "Robert Smith", role: "Client", text: "Franz delivered a complex multi-agent system on time and under budget. A true professional in every sense of the word." },
+    { name: "Bianca De Leon", role: "Product Designer", text: "The attention to detail in the UI/UX is unmatched. It's rare to find an engineer with such a strong design sensibility." },
+    { name: "Kevin Park", role: "Client", text: "The Hermes Agent is our go-to for automation. Its reliability and ease of self-hosting make it a perfect solution for our team." },
+    { name: "Michelle Tan", role: "Business Owner", text: "Franz's ability to simplify complex technical requirements into elegant, high-performance solutions is truly impressive." },
+    { name: "Mateo Ignacio", role: "Entrepreneur", text: "The AI architecture Franz designed for our internal data processing has saved us hundreds of hours in manual labor." },
+    { name: "Sophie Dupont", role: "Digital Strategist", text: "Transformative results. The strategic solutions provided a clear technical roadmap that was essential for our scaling phase." }
   ];
 
   return (
@@ -46,7 +56,7 @@ export default function Home() {
               </h1>
 
               <p className="max-w-2xl mx-auto lg:mx-0 font-mono text-base leading-relaxed text-muted-foreground">
-                Expertly engineered AI agents and full-stack development services. 
+                Expertly engineered AI agents and multi-platform development services. 
                 Deploy high-performance intelligence and custom digital infrastructure 
                 tailored to your enterprise requirements.
               </p>
@@ -78,24 +88,24 @@ export default function Home() {
             <span className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">Filter_Catalog</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {categories.map((cat) => (
               <a 
                 key={cat.name} 
-                href={`/category/${cat.name.toLowerCase().replace(' ', '-')}`}
-                className="group border border-border bg-card p-6 transition-all hover:border-coral hover:shadow-lg relative overflow-hidden"
+                href={`/category/${cat.name.toLowerCase().replace(' & ', '-').replace(' ', '-')}`}
+                className="group border border-border bg-card p-8 transition-all hover:border-coral hover:shadow-lg relative overflow-hidden"
               >
                 <div className="relative z-10">
                   <span className="font-mono text-[10px] text-coral font-bold mb-2 block">[{cat.count}]</span>
-                  <h3 className="font-mono text-sm font-bold uppercase tracking-widest text-foreground group-hover:text-coral transition-colors mb-2">
+                  <h3 className="font-mono text-base font-bold uppercase tracking-widest text-foreground group-hover:text-coral transition-colors mb-4">
                     {cat.name}
                   </h3>
-                  <p className="font-mono text-[10px] text-muted-foreground leading-relaxed">
+                  <p className="font-mono text-[11px] text-muted-foreground leading-relaxed">
                     {cat.description}
                   </p>
                 </div>
-                <div className="absolute bottom-0 right-0 p-2 opacity-10 group-hover:opacity-100 transition-opacity">
-                  <ChevronRight className="h-4 w-4 text-coral" />
+                <div className="absolute bottom-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
+                  <ChevronRight className="h-5 w-5 text-coral" />
                 </div>
               </a>
             ))}
@@ -108,7 +118,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-16 text-center space-y-4">
             <h2 className="font-mono text-3xl font-bold uppercase tracking-widest text-foreground">
-              Service_Catalog<span className="text-coral">.exe</span>
+              Service_Catalog
             </h2>
             <p className="mx-auto max-w-lg font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
               Select a service to view technical specifications and engagement details.
@@ -127,6 +137,56 @@ export default function Home() {
               View All Services
               <span className="h-[1px] w-12 bg-border group-hover:bg-coral" />
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 border-t border-border bg-card/5 transition-colors duration-300 overflow-hidden">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div className="space-y-4">
+              <div className="inline-flex items-center gap-2 border border-coral/30 bg-coral/5 px-4 py-1.5 font-mono text-[10px] uppercase tracking-widest text-coral">
+                Professional Feedback
+              </div>
+              <h2 className="font-mono text-3xl font-bold uppercase tracking-widest text-foreground">
+                Client_Reports
+              </h2>
+            </div>
+            <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest max-w-xs text-right">
+              Validated testimonials from business owners and digital founders.
+            </p>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {testimonials.map((review, i) => (
+              <motion.div 
+                key={review.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: (i % 3) * 0.1 }}
+                className="group relative border border-border bg-card p-8 hover:border-coral transition-all"
+              >
+                <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                  <Terminal className="h-12 w-12 text-coral" />
+                </div>
+                <div className="relative z-10 space-y-4">
+                  <div className="flex gap-1">
+                    {[...Array(5)].map((_, star) => (
+                      <div key={star} className="h-1 w-3 bg-coral/30" />
+                    ))}
+                  </div>
+                  <p className="font-mono text-sm leading-relaxed text-foreground italic">
+                    "{review.text}"
+                  </p>
+                  <div className="pt-4 border-t border-border/50">
+                    <div className="font-mono text-xs font-bold text-foreground uppercase">{review.name}</div>
+                    <div className="font-mono text-[9px] text-muted-foreground uppercase tracking-wider">{review.role}</div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -156,7 +216,7 @@ export default function Home() {
                   </div>
                   <div className="text-left">
                     <div className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">Email_Link</div>
-                    <div className="font-mono text-sm font-bold text-foreground">hello@franzdomingo.dev</div>
+                    <div className="font-mono text-sm font-bold text-foreground">oz@franzdomingo.dev</div>
                   </div>
                 </div>
               </div>

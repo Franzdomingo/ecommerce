@@ -52,15 +52,15 @@ export default function Header() {
         : "border-b border-transparent bg-transparent py-5"
     }`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6">
-        {/* Logo - Static & Professional */}
+        {/* Logo - Minimal & Professional */}
         <Link href="/" className="flex items-center gap-3 group" aria-label="Franz Domingo Store">
-          <div className="relative flex h-9 w-9 items-center justify-center border border-border bg-card transition-colors shadow-sm">
+          <div className="relative flex items-center justify-center transition-colors">
             <Image 
               src="/oz-logo.png" 
               alt="Franz Domingo Logo" 
-              width={20} 
-              height={20} 
-              className="z-10 invert dark:invert-0 transition-transform group-hover:scale-105"
+              width={28} 
+              height={28} 
+              className="z-10 invert dark:invert-0 transition-transform group-hover:scale-110"
             />
           </div>
           <div className="flex flex-col">

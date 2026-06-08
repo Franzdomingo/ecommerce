@@ -6,7 +6,7 @@ import GlitchText from "@/components/GlitchText";
 import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-  const categories = ["hermes", "openclaw", "both", "web-dev", "custom"];
+  const categories = ["ai-intelligence", "software-engineering", "strategic-solutions"];
   return categories.map((slug) => ({ slug }));
 }
 
@@ -14,11 +14,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const { slug } = await params;
   
   const categoryMap: Record<string, string> = {
-    "hermes": "Hermes",
-    "openclaw": "OpenClaw",
-    "both": "Both",
-    "web-dev": "Web Development",
-    "custom": "Custom"
+    "ai-intelligence": "AI & Intelligence",
+    "software-engineering": "Software Engineering",
+    "strategic-solutions": "Strategic Solutions",
+    "custom": "Strategic Solutions",
+    "solutions": "AI & Intelligence",
+    "web-development": "Software Engineering"
   };
 
   const categoryName = categoryMap[slug];
@@ -28,7 +29,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   const products = allProducts.filter(p => p.category === categoryName);
 
   return (
-    <div className="min-h-screen bg-background pb-24 transition-colors duration-300">
+    <div className="min-h-screen bg-background pb-24 transition-colors duration-300 text-foreground">
       {/* Background Gradients */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-coral/5 rounded-full blur-[120px]" />
@@ -49,7 +50,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-coral font-bold">Category_View</span>
           </div>
           <h1 className="font-mono text-4xl font-bold tracking-tighter uppercase sm:text-6xl text-foreground">
-            <GlitchText text={categoryName} /><span className="text-coral">.exe</span>
+            <GlitchText text={categoryName} />
           </h1>
           <p className="font-mono text-xs text-muted-foreground uppercase tracking-widest">
             Displaying {products.length} services matching the {categoryName} specification.
