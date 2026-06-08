@@ -2,85 +2,156 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { ShoppingCart, Menu, X, Sun, Moon, Search } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useTheme } from "next-themes";
+import { useCart } from "@/lib/cart-context";
+import Image from "next/image";
 
 function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
-  const [dark, setDark] = useState(false);
+  const { theme, setTheme } = useTheme();
 
-  useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const isDark = stored === "dark" || (!stored && prefersDark);
-    setDark(isDark);
-    document.documentElement.classList.toggle("dark", isDark);
-  }, []);
+  useEffect(() => setMounted(true), []);
 
-  function toggle() {
-    const next = !dark;
-    setDark(next);
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
-  }
-
-  if (!mounted) return <div className="h-9 w-9" aria-hidden />;
+  if (!mounted) return <div className="w-8 h-8" />;
 
   return (
     <button
-      onClick={toggle}
-      className="relative flex h-9 w-9 items-center justify-center rounded-lg transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
-      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="p-2 text-muted-foreground hover:text-coral transition-colors rounded-full hover:bg-coral/10"
+      aria-label="Toggle Theme"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-        className={`h-4 w-4 absolute transition-all duration-300 ${dark ? "opacity-0 rotate-90 scale-0" : "opacity-100 rotate-0 scale-100"} text-zinc-600`}>
-        <circle cx="12" cy="12" r="5" />
-        <line x1="12" y1="1" x2="12" y2="3" /><line x1="12" y1="21" x2="12" y2="23" />
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" /><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-        <line x1="1" y1="12" x2="3" y2="12" /><line x1="21" y1="12" x2="23" y2="12" />
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" /><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-      </svg>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
-        className={`h-4 w-4 absolute transition-all duration-300 ${dark ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0"} text-zinc-400`}>
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-      </svg>
+      {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
     </button>
   );
 }
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { cartCount } = useCart();
 
   useEffect(() => {
-    function onScroll() { setScrolled(window.scrollY > 10); }
+    function onScroll() { setScrolled(window.scrollY > 20); }
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const navItems = [
+    { name: "Home", href: "/" },
+    { name: "Services", href: "/products" },
+    { name: "Solutions", href: "/category/custom" },
+    { name: "Contact", href: "/#inquiry" },
+  ];
+
   return (
-    <header className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+    <header className={`sticky top-0 z-50 w-full transition-all duration-500 ${
       scrolled
-        ? "border-b border-zinc-200/70 dark:border-zinc-800/70 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-xl shadow-xs"
-        : "border-b border-transparent bg-transparent"
+        ? "border-b border-border bg-background/90 backdrop-blur-md py-3"
+        : "border-b border-transparent bg-transparent py-5"
     }`}>
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 sm:px-6 py-3">
-        <Link href="/" className="relative z-20 flex items-center gap-2.5 group" aria-label="Go to Home">
-          <div className="relative flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-premium-500 to-premium-700 transition-transform duration-300 group-hover:scale-105">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4 text-white">
-              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-            </svg>
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6">
+        {/* Logo - Minimal & Professional */}
+        <Link href="/" className="flex items-center gap-3 group" aria-label="Franz Domingo Store">
+          <div className="relative flex items-center justify-center transition-colors">
+            <Image 
+              src="/oz-logo.png" 
+              alt="Franz Domingo Logo" 
+              width={28} 
+              height={28} 
+              className="z-10 invert dark:invert-0 transition-transform group-hover:scale-110"
+            />
           </div>
-          <span className="text-base font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">FPGD</span>
+          <div className="flex flex-col">
+            <span className="font-mono text-base font-bold tracking-tight text-foreground leading-tight">
+              FRANZ<span className="text-coral">.DOMINGO</span>
+            </span>
+            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground leading-none">
+              Store
+            </span>
+          </div>
         </Link>
-        <div className="flex items-center gap-4">
-          <nav className="hidden sm:flex items-center gap-6">
-            <a href="/#services" className="text-sm font-medium text-zinc-500 dark:text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">Services</a>
-            <a href="/#testimonials" className="text-sm font-medium text-zinc-500 dark:text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">Testimonials</a>
-            <a href="/#faq" className="text-sm font-medium text-zinc-500 dark:text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100">FAQ</a>
-          </nav>
-          <div className="h-5 w-px bg-zinc-200 dark:bg-zinc-800 hidden sm:block" />
+
+        {/* Desktop Nav - High-level Categories */}
+        <nav className="hidden md:flex items-center gap-10">
+          {navItems.map((item) => (
+            <Link 
+              key={item.name} 
+              href={item.href}
+              className="relative font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors py-1"
+            >
+              {item.name}
+              <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-coral transition-all duration-300" />
+            </Link>
+          ))}
+        </nav>
+
+        {/* Actions */}
+        <div className="flex items-center gap-2">
           <ThemeToggle />
+          
+          <div className="h-4 w-[1px] bg-border mx-2 hidden sm:block" />
+          
+          <Link href="/cart" className="relative p-2 text-muted-foreground hover:text-foreground transition-all" aria-label="Shopping Cart">
+            <ShoppingCart className="h-5 w-5" />
+            <AnimatePresence>
+              {cartCount > 0 && (
+                <motion.span 
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-coral text-[8px] font-bold text-white shadow-sm"
+                >
+                  {cartCount}
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </Link>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            className="md:hidden ml-2 p-2 text-muted-foreground hover:text-foreground transition-colors"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden absolute top-full left-0 w-full border-b border-border bg-background/98 backdrop-blur-xl shadow-2xl overflow-hidden"
+          >
+            <nav className="flex flex-col p-8 gap-8">
+              {navItems.map((item) => (
+                <Link 
+                  key={item.name} 
+                  href={item.href}
+                  className="font-mono text-sm uppercase tracking-[0.3em] text-muted-foreground hover:text-coral transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
+              <div className="h-px w-full bg-border/50" />
+              <Link 
+                href="/cart" 
+                className="flex items-center gap-4 font-mono text-sm uppercase tracking-[0.3em] text-coral font-bold"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <ShoppingCart className="h-5 w-5" />
+                View Selection ({cartCount})
+              </Link>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

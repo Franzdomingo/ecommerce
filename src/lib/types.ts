@@ -12,6 +12,7 @@ export interface Product {
   createdAt: string;
   features: string[];
   gradient: string;
+  icon?: string;
 }
 
 export interface ProductFormData {

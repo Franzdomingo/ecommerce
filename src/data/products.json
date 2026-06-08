@@ -1,68 +1,170 @@
 [
   {
     "id": "1",
-    "name": "Hermes Agent",
+    "name": "Hermes AI Agent",
     "slug": "hermes-agent",
-    "description": "Your personal AI assistant hosted and managed. Handles emails, research, scheduling, social media, and more. Always online, always updated. Includes all API token costs.",
+    "description": "Production-ready self-hosted AI agent deployment. Features persistent memory, multi-platform messaging (Telegram/Discord), and custom skill orchestration.",
     "price": 49.00,
     "currency": "USD",
     "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80",
-    "category": "AI Agent Services",
+    "category": "AI & Intelligence",
     "inventory": 999,
     "featured": true,
     "createdAt": "2026-05-28T00:00:00Z",
     "features": [
-      "24/7 AI assistant availability",
-      "Email & calendar management",
-      "Research & summarization",
-      "Social media scheduling",
-      "All API tokens included",
-      "Managed hosting"
+      "Multi-platform (Telegram/Discord)",
+      "Persistent memory engine",
+      "Cron-based automation",
+      "Custom skill engineering",
+      "Managed VPS deployment"
     ],
-    "gradient": "from-indigo-500/20 via-purple-500/20 to-pink-500/20"
+    "gradient": "from-coral/20 via-magenta/20 to-cyan/20"
   },
   {
     "id": "2",
-    "name": "OpenClaw",
+    "name": "OpenClaw Research OS",
     "slug": "openclaw",
-    "description": "Automated multi-agent research team. Give it a topic, get back a full report with sources, organized by specialists. Hosted, managed, and always improving. Includes all API token costs.",
+    "description": "Enterprise-grade multi-agent research team. Automated topic deep-dives with verified source reporting and specialist agent routing.",
     "price": 29.00,
     "currency": "USD",
     "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80",
-    "category": "AI Agent Services",
+    "category": "AI & Intelligence",
     "inventory": 999,
     "featured": true,
     "createdAt": "2026-05-28T00:00:00Z",
     "features": [
-      "Multi-agent research orchestration",
+      "Multi-agent orchestration",
       "Source-verified reports",
-      "Specialist agent routing",
-      "Continuous improvement",
-      "All API tokens included",
-      "Managed hosting"
+      "Real-time search integration",
+      "Specialist skill routing",
+      "Automated documentation"
+    ],
+    "gradient": "from-cyan/20 via-blue-500/20 to-indigo-500/20"
+  },
+  {
+    "id": "3",
+    "name": "Intelligence Bundle",
+    "slug": "bundle",
+    "description": "The complete AI workforce. Combines Hermes personal assistance with OpenClaw's deep research capabilities into a unified operational stack.",
+    "price": 59.00,
+    "currency": "USD",
+    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80",
+    "category": "AI & Intelligence",
+    "inventory": 999,
+    "featured": true,
+    "createdAt": "2026-05-28T00:00:00Z",
+    "features": [
+      "Unified Hermes + OpenClaw",
+      "Priority system updates",
+      "Advanced memory sharing",
+      "Discounted bundle pricing",
+      "Direct technical support"
+    ],
+    "gradient": "from-amber-500/20 via-coral/20 to-cyan/20"
+  },
+  {
+    "id": "4",
+    "name": "Full-Stack Web Engineering",
+    "slug": "web-development",
+    "description": "High-performance Next.js architectures. Custom UI/UX design featuring advanced animations (GSAP/Framer Motion) and scalable backend integration.",
+    "price": 499.00,
+    "currency": "USD",
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
+    "category": "Software Engineering",
+    "inventory": 999,
+    "featured": true,
+    "createdAt": "2026-06-08T00:00:00Z",
+    "features": [
+      "Next.js / TypeScript builds",
+      "GSAP & 3D (Three.js) integration",
+      "Aesthetic UI/UX design",
+      "SEO & Core Web Vitals optimization",
+      "Automated deployment pipelines"
+    ],
+    "gradient": "from-magenta/20 via-rose-500/20 to-coral/20"
+  },
+  {
+    "id": "5",
+    "name": "Cross-Platform Mobile Suite",
+    "slug": "mobile-development",
+    "description": "High-fidelity mobile applications built with Flutter. Seamless performance across iOS and Android with custom native integrations.",
+    "price": 599.00,
+    "currency": "USD",
+    "image": "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&q=80",
+    "category": "Software Engineering",
+    "inventory": 999,
+    "featured": true,
+    "createdAt": "2026-06-08T00:00:00Z",
+    "features": [
+      "Flutter / Dart architectures",
+      "iOS & Android deployment",
+      "State management (Bloc/Riverpod)",
+      "Native bridge integrations",
+      "App Store & Play Store publishing"
+    ],
+    "gradient": "from-blue-500/20 via-indigo-500/20 to-purple-500/20"
+  },
+  {
+    "id": "6",
+    "name": "Custom AI Architecture",
+    "slug": "custom-solutions",
+    "description": "Bespoke AI solutions for complex requirements. Custom model fine-tuning, private data integration, and multi-agent system design.",
+    "price": 999.00,
+    "currency": "USD",
+    "image": "https://images.unsplash.com/photo-1676299081847-824916de030a?w=800&q=80",
+    "category": "Strategic Solutions",
+    "inventory": 1,
+    "featured": true,
+    "createdAt": "2026-06-08T00:00:00Z",
+    "features": [
+      "Private LLM orchestration",
+      "Custom dataset training",
+      "Enterprise system migration",
+      "Security-first AI protocols",
+      "Strategic technical consulting"
     ],
     "gradient": "from-emerald-500/20 via-teal-500/20 to-cyan-500/20"
   },
   {
-    "id": "3",
-    "name": "Hermes + OpenClaw Bundle",
-    "slug": "bundle",
-    "description": "Get both agents at a discount. Your AI assistant plus a research team in one package. Hosted, managed, all API tokens included. Best value.",
-    "price": 59.00,
+    "id": "7",
+    "name": "Computer Vision Suite",
+    "slug": "lifttrack-cv",
+    "description": "Specialized computer vision solutions. Derived from LiftTrack technology, utilizing 3DCNN for real-time posture tracking and movement analysis.",
+    "price": 799.00,
     "currency": "USD",
-    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&q=80",
-    "category": "AI Agent Services",
-    "inventory": 999,
-    "featured": true,
-    "createdAt": "2026-05-28T00:00:00Z",
+    "image": "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=800&q=80",
+    "category": "Strategic Solutions",
+    "inventory": 5,
+    "featured": false,
+    "createdAt": "2026-06-08T00:00:00Z",
     "features": [
-      "Everything in Hermes Agent",
-      "Everything in OpenClaw",
-      "Priority support",
-      "Discounted combined price",
-      "All API tokens included",
-      "Managed hosting"
+      "3DCNN Posture Tracking",
+      "Real-time feedback loops",
+      "TensorFlow/Keras model design",
+      "Mobile Flutter integration",
+      "Movement analytics dashboard"
     ],
-    "gradient": "from-amber-500/20 via-orange-500/20 to-rose-500/20"
+    "gradient": "from-blue-500/20 via-cyan-500/20 to-teal-500/20"
+  },
+  {
+    "id": "8",
+    "name": "Prompt Engineering Engine",
+    "slug": "prompt-engine",
+    "description": "A sophisticated prompt management system. Markdown-based generation and orchestration for consistent LLM output quality.",
+    "price": 89.00,
+    "currency": "USD",
+    "image": "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?w=800&q=80",
+    "category": "AI & Intelligence",
+    "inventory": 999,
+    "featured": false,
+    "createdAt": "2026-06-08T00:00:00Z",
+    "features": [
+      "Markdown-managed prompts",
+      "Context-aware generation",
+      "Automated testing suite",
+      "Multi-model compatibility",
+      "Version controlled library"
+    ],
+    "gradient": "from-orange-500/20 via-amber-500/20 to-yellow-500/20"
   }
 ]
