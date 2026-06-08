@@ -1,63 +1,118 @@
 import type { Metadata } from "next";
-import { Inter_Tight } from "next/font/google";
+import { Geist, IBM_Plex_Mono, Ballet, Space_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import { ThemeProvider } from "next-themes";
+import { CartProvider } from "@/lib/cart-context";
+import Link from "next/link";
+import Image from "next/image";
 
-const interTight = Inter_Tight({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-inter-tight",
+  variable: "--font-sans",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-mono",
+});
+
+const spaceMono = Space_Mono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-space-mono",
+});
+
+const ballet = Ballet({
+  subsets: ["latin"],
+  variable: "--font-ballet",
 });
 
 export const metadata: Metadata = {
-  title: "FPGD — Premium AI Agent Services",
-  description: "Deploy Hermes Agents and OpenClaw on your infrastructure. Managed, secure, production-ready AI agent services starting at $29/mo.",
+  title: "Franz Domingo | Store",
+  description: "Premium AI agents and full-stack development solutions.",
+  icons: {
+    icon: "/oz-logo.png",
+  },
   openGraph: {
-    title: "FPGD — Premium AI Agent Services",
-    description: "Deploy Hermes Agents and OpenClaw on your infrastructure. Managed, secure, production-ready AI agent services starting at $29/mo.",
-    url: "https://fpgd.io",
-    siteName: "FPGD",
+    title: "Franz Domingo | Store",
+    description: "Premium AI agents and full-stack development solutions.",
+    url: "https://store.franzdomingo.dev",
+    siteName: "FPGD Store",
     locale: "en_US",
     type: "website",
   },
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${interTight.variable} h-full antialiased scroll-smooth`}>
-      <body className="min-h-full flex flex-col font-sans tracking-tight bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <footer className="border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/20">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
-            <div className="grid gap-8 sm:grid-cols-3">
-              <div>
-                <div className="flex items-center gap-2 mb-3">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-md bg-gradient-to-br from-premium-500 to-premium-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-3.5 w-3.5 text-white"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+    <html lang="en" suppressHydrationWarning className={`${geist.variable} ${ibmPlexMono.variable} ${spaceMono.variable} ${ballet.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col font-sans bg-background text-foreground transition-colors duration-300">
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          <CartProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <footer className="border-t border-border bg-card/50 backdrop-blur-sm">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 py-12">
+                <div className="grid gap-12 sm:grid-cols-4">
+                  <div className="sm:col-span-2">
+                    <Link href="/" className="flex items-center gap-3 mb-4 group">
+                      <Image 
+                        src="/oz-logo.png" 
+                        alt="Franz Domingo Logo" 
+                        width={32} 
+                        height={32} 
+                        className="invert dark:invert-0 transition-transform group-hover:scale-105"
+                      />
+                      <div className="flex flex-col">
+                        <div className="font-mono text-xl font-bold tracking-tighter text-coral leading-none">
+                          FRANZ<span className="text-foreground">.DOMINGO</span>
+                        </div>
+                        <span className="font-mono text-[8px] uppercase tracking-[0.3em] text-muted-foreground leading-none mt-1">
+                          Official Store
+                        </span>
+                      </div>
+                    </Link>
+                    <p className="text-sm text-muted-foreground leading-relaxed max-w-xs font-mono">
+                      Premium AI agents and full-stack development solutions for the modern enterprise.
+                    </p>
                   </div>
-                  <span className="text-sm font-semibold">FPGD</span>
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-coral mb-4">Navigation</h4>
+                    <ul className="space-y-2 font-mono text-xs">
+                      <li><a href="/" className="text-muted-foreground hover:text-foreground transition-colors">Home</a></li>
+                      <li><a href="/products" className="text-muted-foreground hover:text-foreground transition-colors">Products</a></li>
+                      <li><a href="/categories" className="text-muted-foreground hover:text-foreground transition-colors">Categories</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-coral mb-4">Connect</h4>
+                    <ul className="space-y-2 font-mono text-xs">
+                      <li><a href="https://franzdomingo.dev" className="text-muted-foreground hover:text-foreground transition-colors">Portfolio</a></li>
+                      <li><a href="https://github.com/franzdomingo" className="text-muted-foreground hover:text-foreground transition-colors">GitHub</a></li>
+                    </ul>
+                  </div>
                 </div>
-                <p className="text-xs text-zinc-500 dark:text-zinc-500 leading-relaxed">Premium AI agent services. Deploy intelligence, deliver value.</p>
+                <div className="mt-12 pt-6 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
+                  <p className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono">
+                    &copy; {new Date().getFullYear()} FRANZ DOMINGO
+                  </p>
+                  <div className="flex gap-6 text-[10px] uppercase tracking-widest text-muted-foreground font-mono">
+                    <span className="flex items-center gap-2">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      SYSTEM_STATUS: OPERATIONAL
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div>
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-3">Services</h4>
-                <ul className="space-y-2">
-                  <li><a href="#services" className="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors">All Services</a></li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-xs font-semibold uppercase tracking-wider text-zinc-400 dark:text-zinc-500 mb-3">Legal</h4>
-                <ul className="space-y-2">
-                  <li><span className="text-sm text-zinc-500 dark:text-zinc-500">Terms of Service</span></li>
-                  <li><span className="text-sm text-zinc-500 dark:text-zinc-500">Privacy Policy</span></li>
-                </ul>
-              </div>
-            </div>
-            <div className="mt-10 pt-6 border-t border-zinc-200 dark:border-zinc-800 text-center">
-              <p className="text-xs text-zinc-400 dark:text-zinc-600">&copy; {new Date().getFullYear()} FPGD — Deploy agents, deliver value.</p>
-            </div>
-          </div>
-        </footer>
+            </footer>
+          </CartProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

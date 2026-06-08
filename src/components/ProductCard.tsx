@@ -1,48 +1,99 @@
-import Image from "next/image";
+'use client';
+
 import Link from "next/link";
 import { Product } from "@/lib/types";
+import { motion } from "framer-motion";
+import { ExternalLink, ShoppingCart, Info, Box } from "lucide-react";
+import { useCart } from "@/lib/cart-context";
 
 export default function ProductCard({ product }: { product: Product }) {
+  const { addToCart } = useCart();
+
   return (
-    <Link href={`/products/${product.slug}`}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-zinc-200/60 dark:border-zinc-800/60 bg-white dark:bg-zinc-900/60 transition-all duration-500 hover:shadow-xl hover:shadow-zinc-200/20 dark:hover:shadow-black/20 hover:-translate-y-1">
-      <div className="relative aspect-[3/2] overflow-hidden bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-800 dark:to-zinc-900">
-        <Image src={product.image} alt={product.name} fill
-          className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-[1deg]"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="absolute top-3 left-3">
-          <span className="inline-flex items-center rounded-full bg-white/90 dark:bg-zinc-900/90 backdrop-blur-sm px-3 py-1 text-[11px] font-medium tracking-wider uppercase text-zinc-600 dark:text-zinc-400">{product.category}</span>
-        </div>
-        <div className="absolute top-3 right-3">
-          <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-premium-500 to-premium-600 px-3 py-1 text-[11px] font-semibold text-white shadow-lg shadow-premium-500/25">
-            <svg className="h-3 w-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-            Premium
-          </span>
-        </div>
-      </div>
-      <div className="flex flex-col gap-3 p-5">
-        <h3 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-premium-600 dark:group-hover:text-premium-400 transition-colors duration-300">{product.name}</h3>
-        <p className="text-sm leading-relaxed text-zinc-500 dark:text-zinc-400 line-clamp-2">{product.description}</p>
-        <div className="flex flex-wrap gap-1.5 mt-1">
-          {product.features.slice(0, 3).map((feature) => (
-            <span key={feature} className="inline-flex items-center rounded-md bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 text-[11px] font-medium text-zinc-600 dark:text-zinc-400">{feature}</span>
-          ))}
-          {product.features.length > 3 && (
-            <span className="inline-flex items-center text-[11px] text-zinc-400 dark:text-zinc-500">+{product.features.length - 3}</span>
-          )}
-        </div>
-        <div className="mt-2 flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800 pt-4">
-          <div className="flex items-baseline gap-1">
-            <span className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">${product.price.toFixed(0)}</span>
-            <span className="text-sm font-medium text-zinc-400 dark:text-zinc-500">/mo</span>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className="group relative border border-border bg-card/50 p-1 transition-all hover:border-coral/50"
+    >
+      {/* Corner accents */}
+      <div className="absolute top-0 left-0 h-2 w-2 border-t border-l border-coral/30" />
+      <div className="absolute top-0 right-0 h-2 w-2 border-t border-r border-coral/30" />
+      <div className="absolute bottom-0 left-0 h-2 w-2 border-b border-l border-coral/30" />
+      <div className="absolute bottom-0 right-0 h-2 w-2 border-b border-r border-coral/30" />
+
+      <div className="relative overflow-hidden bg-background aspect-[4/3]">
+        {/* Product Image Placeholder */}
+        <div className="absolute inset-0 flex items-center justify-center bg-card font-mono text-[8px] uppercase tracking-widest text-muted-foreground group-hover:text-coral transition-colors">
+          <div className="text-center">
+            <div className="mb-2 flex justify-center">
+              <div className="h-12 w-12 border border-border/50 flex items-center justify-center group-hover:border-coral transition-colors">
+                <Box className="h-6 w-6" />
+              </div>
+            </div>
+            {product.slug}
           </div>
-          <span className="inline-flex items-center gap-1 text-sm font-medium text-premium-600 dark:text-premium-400 transition-all duration-300 group-hover:gap-2">
-            View details
-            <svg className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
+        </div>
+        
+        {/* Overlay on hover */}
+        <div className="absolute inset-0 bg-coral/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+        <div className="absolute bottom-0 left-0 w-full p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex gap-2">
+          <Link 
+            href={`/products/${product.slug}`}
+            className="flex-1 flex items-center justify-center gap-2 bg-background border border-coral text-coral py-2 font-mono text-[10px] font-bold uppercase tracking-widest hover:bg-coral hover:text-white transition-all"
+          >
+            View Details
+            <ExternalLink className="h-3 w-3" />
+          </Link>
+          <button 
+            onClick={() => addToCart(product)}
+            className="flex-1 flex items-center justify-center gap-2 bg-coral py-2 font-mono text-[10px] font-bold uppercase tracking-widest text-white hover:bg-transparent hover:text-coral border border-coral transition-all"
+          >
+            Add to Cart
+            <ShoppingCart className="h-3 w-3" />
+          </button>
         </div>
       </div>
-    </Link>
+
+      <div className="p-4 space-y-3">
+        <div className="flex items-start justify-between">
+          <div>
+            <div className="font-mono text-[8px] uppercase tracking-widest text-coral mb-1">
+              {product.category || "UNCLASSIFIED"}
+            </div>
+            <h3 className="font-mono text-sm font-bold uppercase tracking-tight text-foreground group-hover:text-coral transition-colors">
+              {product.name}
+            </h3>
+          </div>
+          <div className="font-mono text-xs font-bold text-foreground">
+            ${product.price}
+          </div>
+        </div>
+
+        <p className="font-mono text-[10px] text-muted-foreground line-clamp-2 leading-relaxed">
+          {product.description}
+        </p>
+
+        <div className="pt-2 flex items-center justify-between border-t border-border/50">
+          <div className="flex gap-2">
+            <div className="h-1.5 w-1.5 rounded-full bg-emerald-500 shadow-[0_0_5px_rgba(16,185,129,0.5)]" />
+            <span className="font-mono text-[8px] text-muted-foreground uppercase tracking-widest">Available</span>
+          </div>
+          <button 
+            onClick={() => addToCart(product)}
+            className="text-muted-foreground hover:text-coral transition-colors p-1" 
+            title="Add to Cart"
+          >
+            <ShoppingCart className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      </div>
+
+      {/* Synthetic Glitch Hover Effect */}
+      <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-10 transition-opacity">
+        <div className="absolute inset-0 bg-cyan mix-blend-screen translate-x-[1px]" />
+        <div className="absolute inset-0 bg-magenta mix-blend-screen -translate-x-[1px]" />
+      </div>
+    </motion.div>
   );
 }
